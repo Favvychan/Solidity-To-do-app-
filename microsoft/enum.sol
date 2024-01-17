@@ -1,27 +1,31 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract todo{
-
-  struct micro{
-    string title;
-    bool completed;
+contract shippingStatus {
+  
+  enum Status{
+    pending,
+    shipped,
+    accepted,
+    rejected,
+    canceled
+  }
+  Status public status; 
+  
+  function get() public view returns (Status){
+    return status;
   }
 
-  micro[] public tech;
-
-  //TO INSERT 
-  function insert (string memory _title) public {
-    tech.push(micro(_title,false));
+  function set(Status _status) public {
+    status = _status;
   }
 
-  //TO UPDATE
-  function update (uint index, string memory _title) public {
-    tech [index].title = _title;
+
+  function cancel() public {
+    status = Status.canceled;
   }
 
-  function status(uint index) public {
-    tech[index].completed = true;
-}
-
+  function Delete() public {
+    delete status;
+  }
 }
